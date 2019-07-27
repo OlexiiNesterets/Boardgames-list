@@ -1,0 +1,16 @@
+
+<table>
+  <tr>
+    <th (click)="toSortName()">Название</th>
+    <th (click)="toSortPlayersMin()">Мин. кол-во игроков</th>
+    <th (click)="toSortPlayersMax()">Макс. кол-во игроков</th>
+  </tr>
+  <tr *ngFor="let game of gamesToShow">
+    <td>{{game.name}}</td>
+    <td>{{game.players.min}}</td>
+    <td>{{game.players.max || '-'}}</td>
+  </tr>
+</table>
+
+  <input type="text" name="players" [(ngModel)]="form.amount"> people
+  <button (click)="onSubmit()">filter</button>
