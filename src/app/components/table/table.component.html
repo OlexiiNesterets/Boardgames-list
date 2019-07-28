@@ -1,16 +1,27 @@
+<div class="container">
+  <!-- <table class="table">
+    <tbody class="tbody">
+      <tr *ngFor="let game of gamesToShow" class="game-tr">
+        <td class="td">{{game.name}}</td>
+        <td class="td centred">{{game.players.min}}</td>
+        <td class="td centred">{{game.players.max || '-'}}</td>
+      </tr>
+    </tbody>
+  </table> -->
 
-<table>
-  <tr>
-    <th (click)="toSortName()">Название</th>
-    <th (click)="toSortPlayersMin()">Мин. кол-во игроков</th>
-    <th (click)="toSortPlayersMax()">Макс. кол-во игроков</th>
-  </tr>
-  <tr *ngFor="let game of gamesToShow">
-    <td>{{game.name}}</td>
-    <td>{{game.players.min}}</td>
-    <td>{{game.players.max || '-'}}</td>
-  </tr>
-</table>
+  <div class="table">
+    <div class="table-header">
+      <div (click)="toSortName()" class="th left name">Название</div>
+      <div (click)="toSortPlayersMin()" class="th centred">min</div>
+      <div (click)="toSortPlayersMax()" class="th centred">max</div>
+    </div>
+    <div *ngFor="let game of gamesToShow" class="game-tr">
+        <div class="td name">{{game.name}}</div>
+        <div class="td centred">{{game.players.min}}</div>
+        <div class="td centred">{{game.players.max || '-'}}</div>
+      </div>
+  </div>
 
   <input type="text" name="players" [(ngModel)]="form.amount"> people
   <button (click)="onSubmit()">filter</button>
+</div>
