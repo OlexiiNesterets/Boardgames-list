@@ -63,5 +63,7 @@ export const gamesList: Boardgame[] = [
     { name: 'Garden Dice', players: { min: 2, max: 4 } },
     { name: 'Love Letter', players: { min: 3, max: 4 } },
     { name: 'Ghost Stories', players: { min: 3, max: 4 } },
-    { name: 'Age of War (Касугаяма)', players: { min: 3, max: 5 } }
+    { name: 'Age of War (Касугаяма)', players: { min: 3, max: 5 } },
+    { name: 'Hive', players: { min: 2, max: 2 } },
+
 ]

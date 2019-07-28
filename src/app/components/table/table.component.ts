@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { gamesList } from '../../games-list';
 
@@ -7,9 +7,10 @@ import { gamesList } from '../../games-list';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   @ViewChild('playersInput') playersInput: NgModel;
+  @ViewChild('name') nameInput: ElementRef;
 
 
   gamesList = gamesList;
@@ -23,6 +24,8 @@ export class TableComponent implements OnInit, AfterViewInit {
     max: false
   };
 
+  selectedHeading;
+
   constructor() { }
 
   ngOnInit() {
@@ -31,7 +34,12 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.onSubmit();
   }
 
+  ngAfterContentInit() {
+    this.selectedHeading = this.nameInput.nativeElement;
+  }
+
   ngAfterViewInit() {
+    console.log(this.selectedHeading);
     this.playersInput.valueChanges.subscribe(val => {
       console.log(val);
       setTimeout(() => {
@@ -59,7 +67,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     console.log('after filtering');
   }
 
-  toSortName() {
+  toSortName(elem?: ElementRef) {
     this.gamesToShow.sort((gameFirst, gameSecond) => {
       if (this.isAscending.name) {
         return gameFirst.name < gameSecond.name ? 1 : -1;
@@ -67,9 +75,10 @@ export class TableComponent implements OnInit, AfterViewInit {
       return gameFirst.name > gameSecond.name ? 1 : -1;
     });
     this.isAscending.name = !this.isAscending.name;
+    this.toSelect(elem);
   }
 
-  toSortPlayersMin() {
+  toSortPlayersMin(elem: ElementRef) {
     this.gamesToShow.sort((gameFirst, gameSecond) => {
       if (this.isAscending.min) {
         return gameFirst.players.min < gameSecond.players.min ? 1 : -1;
@@ -77,9 +86,10 @@ export class TableComponent implements OnInit, AfterViewInit {
       return gameFirst.players.min > gameSecond.players.min ? 1 : -1;
     });
     this.isAscending.min = !this.isAscending.min;
+    this.toSelect(elem);
   }
 
-  toSortPlayersMax() {
+  toSortPlayersMax(elem: ElementRef) {
     this.gamesToShow.sort((gameFirst, gameSecond) => {
       const first = gameFirst.players.max ? gameFirst.players.max : 999;
       const second = gameSecond.players.max ? gameSecond.players.max : 999;
@@ -89,6 +99,14 @@ export class TableComponent implements OnInit, AfterViewInit {
       return first > second ? 1 : -1;
     });
     this.isAscending.max = !this.isAscending.max;
+    this.toSelect(elem);
+  }
+
+  toSelect(elem: ElementRef) {
+    if (elem) {
+      console.log(elem);
+    }
+    this.selectedHeading = elem;
   }
 
 }

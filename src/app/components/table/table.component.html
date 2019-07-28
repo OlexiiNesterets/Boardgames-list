@@ -4,9 +4,15 @@
       <input type="text" #playersInput="ngModel" [(ngModel)]="form.amount" class="players-filter-input"
         placeholder="Кол-во игроков">
       <div class="headings">
-        <div (click)="toSortName()" class="th left name">Название</div>
-        <div (click)="toSortPlayersMin()" class="th centred">min</div>
-        <div (click)="toSortPlayersMax()" class="th centred">max</div>
+        <div (click)="toSortName(name)" #name [class.selected]="name === selectedHeading" class="th left name">
+          <span>Название</span>
+        </div>
+        <div (click)="toSortPlayersMin(min)" #min [class.selected]="min === selectedHeading" class="th centred">
+          <span>min</span>
+        </div>
+        <div (click)="toSortPlayersMax(max)" #max [class.selected]="max === selectedHeading" class="th centred">
+          <span>max</span>
+        </div>
       </div>
     </div>
     <div *ngFor="let game of gamesToShow" class="game-tr">

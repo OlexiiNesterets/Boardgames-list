@@ -63,3 +63,8 @@
     text-align: center;
     padding-top: 50px;
 }
+
+.selected {
+    color: #31a4e6;
+    outline: none;
+}
