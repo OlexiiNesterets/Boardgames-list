@@ -1,21 +1,30 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 700px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
 .table {
+    font-family: sans-serif;
 }
 
 .table-header {
     display: flex;
-    font-weight: 700;
+    flex-direction: column;
     position: sticky;
     top: 0;
     background: white;
     box-shadow: 0 2px 6px -4px #969696;
+}
+
+.players-filter-input {
+    align-self: flex-end;
+    width: 37%;
+    padding: 4px;
+}
+
+.headings {
+    display: flex;
+    font-weight: 700;
 }
 
 .name {
@@ -34,6 +43,9 @@
 .centred {
     text-align: center;
     width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .game-tr {
@@ -45,4 +57,9 @@
 }
 
 .game-tr:nth-child(even) {
+}
+
+.no-matches {
+    text-align: center;
+    padding-top: 50px;
 }

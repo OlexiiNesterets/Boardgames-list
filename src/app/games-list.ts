@@ -12,7 +12,7 @@ export const gamesList: Boardgame[] = [
     { name: 'Scrabble (eng)', players: { min: 2, max: 4 } },
     { name: 'Цитадели (делюкс)', players: { min: 3, max: 8 } },
     { name: 'Fluxx', players: { min: 3, max: 6 } },
-    { name: '7 Чудес: Дуэль', players: { min: 3, max: 6 } },
+    { name: '7 Чудес: Дуэль', players: { min: 2, max: 2 } },
     { name: 'Гильдии Лаара', players: { min: 4, max: 4 } },
     { name: 'Uno', players: { min: 3, max: null } },
     { name: 'Золото Инков', players: { min: 4, max: null } },
@@ -62,5 +62,6 @@ export const gamesList: Boardgame[] = [
     { name: 'Can\'t Stop', players: { min: 2, max: 4 } },
     { name: 'Garden Dice', players: { min: 2, max: 4 } },
     { name: 'Love Letter', players: { min: 3, max: 4 } },
-    { name: 'Ghost Stories', players: { min: 3, max: 4 } }
+    { name: 'Ghost Stories', players: { min: 3, max: 4 } },
+    { name: 'Age of War (Касугаяма)', players: { min: 3, max: 5 } }
 ]

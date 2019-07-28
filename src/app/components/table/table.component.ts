@@ -1,4 +1,5 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, ViewChild } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { gamesList } from '../../games-list';
 
 @Component({
@@ -6,11 +7,13 @@ import { gamesList } from '../../games-list';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('playersInput') playersInput: NgModel;
+
 
   gamesList = gamesList;
-
-  gamesToShow = gamesList;
+  gamesToShow;
 
   form: { amount: number | null } = { amount: null };
 
@@ -23,19 +26,37 @@ export class TableComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.gamesToShow = gamesList;
+    this.toSortName();
+    this.onSubmit();
+  }
 
+  ngAfterViewInit() {
+    this.playersInput.valueChanges.subscribe(val => {
+      console.log(val);
+      setTimeout(() => {
+        this.onSubmit();
+      }, 0);
+    });
   }
 
   onSubmit() {
     const amount = +this.form.amount;
-    if (!Number.isInteger(amount)) {
+    if (!/\d/.test(amount.toString())) {
+      console.log('returned');
+      console.log(amount);
       return;
     }
-    this.gamesToShow = this.gamesList.filter(game => {
-      const maxLimitOk = !game.players.max || game.players.max >= amount;
-      const minLimitOk = game.players.min <= amount;
-      return minLimitOk && maxLimitOk;
-    })
+    if (amount) {
+      this.gamesToShow = this.gamesList.filter(game => {
+        const maxLimitOk = !game.players.max || game.players.max >= amount;
+        const minLimitOk = game.players.min <= amount;
+        return minLimitOk && maxLimitOk;
+      });
+    } else {
+      this.gamesToShow = gamesList;
+    }
+    console.log('after filtering');
   }
 
   toSortName() {
