@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { gamesList } from '../../games-list';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-table',
@@ -11,7 +13,6 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   @ViewChild('playersInput') playersInput: NgModel;
   @ViewChild('name') nameInput: ElementRef;
-
 
   gamesList = gamesList;
   gamesToShow;
@@ -26,7 +27,15 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   selectedHeading;
 
-  constructor() { }
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'arrow',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/svg/down-arrow.svg')
+    );
+  }
 
   ngOnInit() {
     this.gamesToShow = gamesList;

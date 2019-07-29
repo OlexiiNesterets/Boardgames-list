@@ -1,30 +1,55 @@
 <div class="container">
+
   <div class="table">
+
     <div class="table-header">
-      <input type="text" #playersInput="ngModel" [(ngModel)]="form.amount" class="players-filter-input"
-        placeholder="Кол-во игроков">
+      <input type="text"
+             #playersInput="ngModel"
+             [(ngModel)]="form.amount"
+             class="players-filter-input"
+             placeholder="Кол-во игроков">
       <div class="headings">
-        <div (click)="toSortName(name)" #name [class.selected]="name === selectedHeading" class="th left name">
+        <div (click)="toSortName(name)"
+             #name
+             [class.selected]="name === selectedHeading"
+             class="th left name">
           <span>Название</span>
+          <mat-icon svgIcon='arrow'
+                    *ngIf="name === selectedHeading"
+                    [class.arrow-up]="isAscending.name"
+                    class="arrow-icon"></mat-icon>
         </div>
-        <div (click)="toSortPlayersMin(min)" #min [class.selected]="min === selectedHeading" class="th centred">
+        <div (click)="toSortPlayersMin(min)"
+             #min
+             [class.selected]="min === selectedHeading"
+             class="th th-small">
           <span>min</span>
+          <mat-icon svgIcon='arrow'
+                    *ngIf="min === selectedHeading"
+                    [class.arrow-up]="isAscending.min"
+                    class="arrow-icon"></mat-icon>
         </div>
-        <div (click)="toSortPlayersMax(max)" #max [class.selected]="max === selectedHeading" class="th centred">
+        <div (click)="toSortPlayersMax(max)"
+             #max
+             [class.selected]="max === selectedHeading"
+             class="th th-small">
           <span>max</span>
+          <mat-icon svgIcon='arrow'
+                    *ngIf="max === selectedHeading"
+                    [class.arrow-up]="isAscending.max"
+                    class="arrow-icon"></mat-icon>
         </div>
       </div>
     </div>
-    <div *ngFor="let game of gamesToShow" class="game-tr">
+    <div *ngFor="let game of gamesToShow"
+         class="game-tr">
       <div class="td name">{{game.name}}</div>
       <div class="td centred">{{game.players.min}}</div>
       <div class="td centred">{{game.players.max || '-'}}</div>
     </div>
-    <div *ngIf="!gamesToShow.length" class="no-matches">
+    <div *ngIf="!gamesToShow.length"
+         class="no-matches">
       <span>Совпадений нет</span>
     </div>
   </div>
-
-  <!-- <input type="text" name="players" [(ngModel)]="form.amount"> people
-  <button (click)="onSubmit()">filter</button> -->
 </div>

@@ -12,6 +12,7 @@
     flex-direction: column;
     position: sticky;
     top: 0;
+    padding-top: 10px;
     background: white;
     box-shadow: 0 2px 6px -4px #969696;
 }
@@ -36,13 +37,23 @@
     padding: 15px;
 }
 
+.th:active {
+    background: #efefef;
+}
+
+.th-small {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+}
+
 .left {
     text-align: left;
 }
 
 .centred {
     text-align: center;
-    width: 30px;
+    width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,6 +73,18 @@
 .no-matches {
     text-align: center;
     padding-top: 50px;
+}
+
+.arrow-icon {
+    width: 11px;
+    height: 11px;
+    margin-left: 5px;
+    padding-top: 1px;
+}
+
+.arrow-up {
+    transform: rotate(-180deg);
+    transform-origin: 50% 76%;
 }
 
 .selected {
