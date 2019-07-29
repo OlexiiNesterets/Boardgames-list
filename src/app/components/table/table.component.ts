@@ -3,8 +3,6 @@ import { NgModel } from '@angular/forms';
 import { gamesList } from '../../games-list';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -35,7 +33,7 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   ) {
     this.matIconRegistry.addSvgIcon(
       'arrow',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(environment.svgArrowUrl)
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/down-arrow.svg')
     );
   }
 
