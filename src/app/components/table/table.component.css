@@ -64,7 +64,7 @@
 }
 
 .game-tr:nth-child(odd) {
-    background: #e8e8e8;    
+    background: #f0f0f0;    
 }
 
 .game-tr:nth-child(even) {
