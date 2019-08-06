@@ -15,7 +15,7 @@ export const gamesList: Boardgame[] = [
     { name: '7 Чудес: Дуэль', searchName:'7 Чудес: Дуэль', players: { min: 2, max: 2 } },
     { name: 'Гильдии Лаара', searchName:'Гильдии Лаара', players: { min: 4, max: 4 } },
     { name: 'Uno', searchName:'Uno', players: { min: 3, max: null } },
-    { name: 'Золото Инков', searchName:'Золото Инков', players: { min: 4, max: null } },
+    { name: 'Золото Инков', searchName:'Incan Gold', players: { min: 4, max: null } },
     { name: 'Wrong Chemistry (Молекула)', searchName:'Wrong Chemistry', players: { min: 2, max: 3 } },
     { name: 'Fairy Tale', searchName:'Fairy Tale', players: { min: 4, max: 5 } },
     { name: 'Тотем', searchName:'Тотем', players: { min: 3, max: null } },
