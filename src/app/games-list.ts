@@ -35,7 +35,7 @@ export const gamesList: Boardgame[] = [
     { name: 'Этнос', searchName:'Этнос', players: { min: 2, max: 6 } },
     { name: 'Наместник', searchName:'Наместник', players: { min: 2, max: 4 } },
     { name: 'Эвакуация', searchName:'Эвакуация', players: { min: 2, max: 5 } },
-    { name: 'Hanabi & Ikebana', searchName:'Hanabi & Ikebana', players: { min: 2, max: 5 } },
+    { name: 'Hanabi & Ikebana', searchName:'Hanabi and Ikebana', players: { min: 2, max: 5 } },
     { name: 'Mr. Jack in New York', searchName:'Mr. Jack in New York', players: { min: 2, max: 2 } },
     { name: 'No Thanks!', searchName:'No Thanks!', players: { min: 3, max: 5 } },
     { name: 'Dice Town', searchName:'Dice Town', players: { min: 3, max: 5 } },
