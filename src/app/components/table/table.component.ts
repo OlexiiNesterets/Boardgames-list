@@ -21,9 +21,11 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   isAscending = {
     name: false,
-    min: false,
-    max: false
+    min: true,
+    max: true
   };
+
+  namePreviousState: boolean;
 
   selectedHeading;
 
@@ -77,6 +79,22 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   }
 
   toSortName(elem?) {
+
+    if (!this.checkForSelected(elem)) {
+      this.gamesToShow.sort((gameFirst, gameSecond) => {
+        if (!this.isAscending.name) {
+          return gameFirst.name < gameSecond.name ? 1 : -1;
+        }
+        return gameFirst.name > gameSecond.name ? 1 : -1;
+      });
+      this.toSelect(elem);
+      return;
+    }
+
+    this.sortNameHelper(elem);
+  }
+
+  private sortNameHelper(elem?) {
     this.gamesToShow.sort((gameFirst, gameSecond) => {
       if (this.isAscending.name) {
         return gameFirst.name < gameSecond.name ? 1 : -1;
@@ -91,8 +109,24 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   toSortPlayersMin(elem) {
 
+    this.namePreviousState = this.isAscending.name;
+
+    if (!this.checkForSelected(elem)) {
+      this.toSelect(elem);
+      this.isAscending.name = true;
+      this.sortNameHelper(elem);
+      this.gamesToShow.sort((gameFirst, gameSecond) => {
+        if (!this.isAscending.min) {
+          return gameFirst.players.min < gameSecond.players.min ? 1 : -1;
+        }
+        return gameFirst.players.min > gameSecond.players.min ? 1 : -1;
+      });
+      this.isAscending.name = this.namePreviousState;
+      return;
+    }
+
     this.isAscending.name = true;
-    this.toSortName();
+    this.sortNameHelper(elem);
 
     this.gamesToShow.sort((gameFirst, gameSecond) => {
       if (this.isAscending.min) {
@@ -102,12 +136,31 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     });
     this.isAscending.min = !this.isAscending.min;
     this.toSelect(elem);
+    this.isAscending.name = this.namePreviousState;
   }
 
   toSortPlayersMax(elem) {
 
+    this.namePreviousState = this.isAscending.name;
+
+    if (!this.checkForSelected(elem)) {
+      this.toSelect(elem);
+      this.isAscending.name = true;
+      this.sortNameHelper(elem);
+      this.gamesToShow.sort((gameFirst, gameSecond) => {
+        const first = gameFirst.players.max ? gameFirst.players.max : 999;
+        const second = gameSecond.players.max ? gameSecond.players.max : 999;
+        if (!this.isAscending.max) {
+          return first < second ? 1 : -1;
+        }
+        return first > second ? 1 : -1;
+      });
+      this.isAscending.name = this.namePreviousState;
+      return;
+    }
+
     this.isAscending.name = true;
-    this.toSortName();
+    this.sortNameHelper(elem);
 
     this.gamesToShow.sort((gameFirst, gameSecond) => {
       const first = gameFirst.players.max ? gameFirst.players.max : 999;
@@ -119,10 +172,15 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     });
     this.isAscending.max = !this.isAscending.max;
     this.toSelect(elem);
+    this.isAscending.name = this.namePreviousState;
   }
 
   toSelect(elem: ElementRef) {
     this.selectedHeading = elem;
+  }
+
+  checkForSelected(elem) {
+    return elem === this.selectedHeading;
   }
 
 }
