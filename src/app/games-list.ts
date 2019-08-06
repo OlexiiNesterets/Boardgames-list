@@ -41,7 +41,7 @@ export const gamesList: Boardgame[] = [
     { name: 'Dice Town', searchName:'Dice Town', players: { min: 3, max: 5 } },
     { name: 'BANG! The Dice Game', searchName:'BANG! The Dice Game', players: { min: 5, max: 8 } },
     { name: 'Сопротивление', searchName:'Сопротивление', players: { min: 5, max: 10 } },
-    { name: 'Gobbit', searchName:'Gobbit', players: { min: 3, max: 8 } },
+    { name: 'Gobb\'it', searchName:'Gobb\'it', players: { min: 3, max: 8 } },
     { name: '7 Dragons', searchName:'7 Dragons', players: { min: 3, max: 5 } },
     { name: 'Блеф', searchName:'Блеф', players: { min: 3, max: 6 } },
     { name: 'Jenga', searchName:'Jenga', players: { min: 2, max: null } },
