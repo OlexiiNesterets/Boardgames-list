@@ -47,12 +47,11 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   ngAfterContentInit() {
     this.selectedHeading = this.nameInput.nativeElement;
+
   }
 
   ngAfterViewInit() {
-    console.log(this.selectedHeading);
-    this.playersInput.valueChanges.subscribe(val => {
-      console.log(val);
+    this.playersInput.valueChanges.subscribe(() => {
       setTimeout(() => {
         this.onSubmit();
       }, 0);
