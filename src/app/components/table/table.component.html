@@ -2,11 +2,14 @@
   <div class="table">
 
     <div class="table-header">
-      <input type="text"
-             #playersInput="ngModel"
-             [(ngModel)]="form.amount"
-             class="players-filter-input"
-             placeholder="Кол-во игроков">
+      <div class="header-top">
+        <span class="tip">Двойной клик для поиска игры в Google</span>
+        <input type="text"
+               #playersInput="ngModel"
+               [(ngModel)]="form.amount"
+               class="players-filter-input"
+               placeholder="Кол-во игроков">
+      </div>
       <div class="headings">
         <div (click)="toSortName(name)"
              #name
