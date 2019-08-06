@@ -41,6 +41,9 @@
       </div>
     </div>
     <div *ngFor="let game of gamesToShow"
+         (click)="selectedGame = game"
+         (dblclick)="googleGameSearch(game)"
+         [class.selected-game]="selectedGame === game"
          class="game-tr">
       <div class="td name">{{game.name}}</div>
       <div class="td centred">{{game.players.min}}</div>

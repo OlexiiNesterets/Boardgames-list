@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { gamesList } from '../../games-list';
+import { Boardgame } from '../../models/boardgame';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -28,6 +29,7 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   namePreviousState: boolean;
 
   selectedHeading;
+  selectedGame: Boardgame;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -180,6 +182,13 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   checkForSelected(elem) {
     return elem === this.selectedHeading;
+  }
+
+  googleGameSearch(game: Boardgame) {
+    console.log('DOUBLE click');
+    console.log(game);
+    const searchName = game.searchName.toLowerCase().replace(' ', '+');
+    open(`https://www.google.com.ua/search?&q=${searchName}+настольная+игра`, `_blank`);
   }
 
 }

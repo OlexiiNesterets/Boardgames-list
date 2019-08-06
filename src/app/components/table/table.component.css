@@ -67,9 +67,6 @@
     background: #f0f0f0;    
 }
 
-.game-tr:nth-child(even) {
-}
-
 .no-matches {
     text-align: center;
     padding-top: 50px;
@@ -90,4 +87,9 @@
 .selected {
     color: #31a4e6;
     outline: none;
+}
+
+.selected-game.game-tr {
+    font-weight: 600;
+    color: #089cf3;
 }
