@@ -23,7 +23,7 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   showModal: boolean;
   showChoosenList: boolean;
   chooseForRandom: boolean;
-  choosenGames: string[] = [];
+  choosenGames = [];
 
   form: { amount: number | null } = { amount: null };
 
@@ -225,7 +225,7 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     open(`https://www.google.com.ua/search?&q=${searchName}+настольная+игра`, `_blank`);
   }
 
-  getRandom(arr?: []) {
+  getRandom(arr?: any) {
     if (arr && arr.length) {
       this.recommendedGame = sample(arr);
     } else {
