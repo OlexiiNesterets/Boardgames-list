@@ -4,6 +4,7 @@ import { gamesList } from '../../games-list';
 import { Boardgame } from '../../models/boardgame';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as sample from 'lodash.sample';
 
 @Component({
   selector: 'app-table',
@@ -17,6 +18,8 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   gamesList = gamesList;
   gamesToShow;
+  recommendedGame: Boardgame;
+  showModal: boolean;
 
   form: { amount: number | null } = { amount: null };
 
@@ -189,6 +192,11 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     console.log(game);
     const searchName = game.searchName.toLowerCase().replace(' ', '+');
     open(`https://www.google.com.ua/search?&q=${searchName}+настольная+игра`, `_blank`);
+  }
+
+  getRandom() {
+    this.recommendedGame = sample(this.gamesToShow);
+    this.showModal = true;
   }
 
 }

@@ -24,6 +24,19 @@
     padding: 15px;
 }
 
+.random-area {
+    padding: 15px;
+}
+
+.random-game-button {
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background: #32cde6;
+    color: white;
+    text-transform: lowercase;
+}
+
 .tip {
     font-size: 7px;
     font-style: italic;
@@ -108,4 +121,43 @@
 
 .selected-game.game-tr {
     color: #089cf3;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    background: #1e2b2bb0;
+}
+
+.message-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 30px 50px;
+    background: white;
+    color: #656565;
+    text-align: center;
+    max-width: 50%;
+    min-width: 50%;
+    border-radius: 10px;
+    
+}
+
+.static-message {
+    font-size: 10px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.recommended-game {
+    font-weight: bold;
+    font-size: 40px;
 }

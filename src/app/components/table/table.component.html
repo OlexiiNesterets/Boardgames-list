@@ -10,6 +10,10 @@
                class="players-filter-input"
                placeholder="Кол-во игроков">
       </div>
+      <div class="random-area">
+        <button (click)="getRandom()"
+                class="random-game-button">Выбрать случайную игру</button>
+      </div>
       <div class="headings">
         <div (click)="toSortName(name)"
              #name
@@ -56,5 +60,14 @@
          class="no-matches">
       <span>Совпадений нет</span>
     </div>
+  </div>
+</div>
+
+<div *ngIf="showModal"
+     (click)="showModal = false"
+     class="modal">
+  <div class="message-area">
+    <span class="static-message">Зарубитесь в</span>
+    <span class="recommended-game">{{recommendedGame.name}}</span>
   </div>
 </div>
