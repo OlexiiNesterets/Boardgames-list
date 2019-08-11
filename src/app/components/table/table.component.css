@@ -26,6 +26,14 @@
 
 .random-area {
     padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.poteitial-games {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
 }
 
 .random-game-button {
@@ -97,6 +105,11 @@
     background: #f0f0f0;    
 }
 
+.game-tr-choosen {
+    display: flex;
+    align-items: center;
+}
+
 .no-matches {
     text-align: center;
     padding-top: 50px;
@@ -123,6 +136,17 @@
     color: #089cf3;
 }
 
+.choosen-for-random {
+    color: #e66431;
+}
+
+.choosen-games-count {
+    border: none;
+    background: #32cde6;
+    color: white;
+    border-radius: 5px;
+}
+
 .modal {
     position: fixed;
     top: 0;
@@ -141,14 +165,20 @@
     flex-direction: column;
     justify-content: center;
     box-sizing: border-box;
-    padding: 30px 50px;
+    padding: 30px 4%;
     background: white;
     color: #656565;
     text-align: center;
-    max-width: 50%;
+    max-width: 80%;
     min-width: 50%;
     border-radius: 10px;
-    
+}
+
+.message-area-choosen {
+    display: block;
+    max-height: 80vh;
+    overflow: auto;
+    padding: 0;
 }
 
 .static-message {
@@ -160,4 +190,22 @@
 .recommended-game {
     font-weight: bold;
     font-size: 40px;
+}
+
+.close-button {
+    position: absolute;
+    right: 17px;
+    top: 17px;
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.close-button-item {
+    color: gray;
+    position: static;
+    margin-right: 15px;
+    font-size: 15px;
 }

@@ -11,8 +11,18 @@
                placeholder="Кол-во игроков">
       </div>
       <div class="random-area">
-        <button (click)="getRandom()"
-                class="random-game-button">Выбрать случайную игру</button>
+        <button (click)="getRandom(choosenGames)"
+                class="random-game-button">Случайная игра</button>
+        <label class="poteitial-games">
+          <span>Возможные игры</span>
+          <input type="checkbox"
+                 (click)="selectedGame = null"
+                 #chooseGamesForRandom="ngModel"
+                 [(ngModel)]="chooseForRandom">
+        </label>
+        <button *ngIf="chooseForRandom && choosenGames.length"
+                (click)="showChoosenList = true"
+                class="choosen-games-count">{{choosenGames.length}}</button>
       </div>
       <div class="headings">
         <div (click)="toSortName(name)"
@@ -48,9 +58,10 @@
       </div>
     </div>
     <div *ngFor="let game of gamesToShow"
-         (click)="selectedGame = game"
-         (dblclick)="googleGameSearch(game)"
+         (click)="onCLick(game)"
+         (dblclick)="onDoubleClick(game)"
          [class.selected-game]="selectedGame === game"
+         [class.choosen-for-random]="choosenGames.indexOf(game.name) !== -1"
          class="game-tr">
       <div class="td name">{{game.name}}</div>
       <div class="td centred">{{game.players.min}}</div>
@@ -68,6 +79,20 @@
      class="modal">
   <div class="message-area">
     <span class="static-message">Зарубитесь в</span>
-    <span class="recommended-game">{{recommendedGame.name}}</span>
+    <span class="recommended-game">{{recommendedGame}}</span>
+  </div>
+</div>
+
+<div *ngIf="showChoosenList"
+     class="modal">
+  <button (click)="showChoosenList = false"
+          class="close-button">x</button>
+  <div class="message-area message-area-choosen">
+    <div *ngFor="let game of choosenGames"
+         class="game-tr game-tr-choosen">
+      <div class="td name">{{game}}</div>
+      <button (click)="removeGame(game)"
+              class="close-button close-button-item">X</button>
+    </div>
   </div>
 </div>

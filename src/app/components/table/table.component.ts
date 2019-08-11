@@ -15,11 +15,15 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   @ViewChild('playersInput') playersInput: NgModel;
   @ViewChild('name') nameInput: ElementRef;
+  @ViewChild('chooseGamesForRandom') checkboxRandom: NgModel;
 
   gamesList = gamesList;
   gamesToShow;
   recommendedGame: Boardgame;
   showModal: boolean;
+  showChoosenList: boolean;
+  chooseForRandom: boolean;
+  choosenGames: string[] = [];
 
   form: { amount: number | null } = { amount: null };
 
@@ -59,6 +63,13 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     this.playersInput.valueChanges.subscribe(() => {
       setTimeout(() => {
         this.onSubmit();
+      }, 0);
+    });
+
+    this.checkboxRandom.valueChanges.subscribe(result => {
+      setTimeout(() => {
+        this.selectedGame = null
+        this.choosenGames = result ? this.choosenGames : [];
       }, 0);
     });
   }
@@ -187,16 +198,48 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     return elem === this.selectedHeading;
   }
 
+  onCLick(game: Boardgame) {
+    if (!this.chooseForRandom) {
+      this.selectedGame = game;
+    } else {
+      if (this.choosenGames.indexOf(game.name) === -1) {
+        this.choosenGames.push(game.name);
+        console.log({choosenGames: this.choosenGames});
+      } else {
+        this.choosenGames = this.choosenGames.filter(gameName => {
+          return gameName !== game.name;
+        });
+        console.log({choosenGames: this.choosenGames});
+      }
+    }
+  }
+
+  onDoubleClick(game: Boardgame) {
+    if (!this.chooseForRandom) {
+      this.googleGameSearch(game);
+    }
+  }
+
   googleGameSearch(game: Boardgame) {
-    console.log('DOUBLE click');
-    console.log(game);
     const searchName = game.searchName.toLowerCase().replace(' ', '+');
     open(`https://www.google.com.ua/search?&q=${searchName}+настольная+игра`, `_blank`);
   }
 
-  getRandom() {
-    this.recommendedGame = sample(this.gamesToShow);
+  getRandom(arr?: []) {
+    if (arr && arr.length) {
+      this.recommendedGame = sample(arr);
+    } else {
+      this.recommendedGame = sample(this.gamesToShow.map(game => game.name));      
+    }
     this.showModal = true;
   }
 
+  removeGame(game: string) {
+    this.choosenGames = this.choosenGames.filter(currGame => currGame !== game);
+    if (!this.choosenGames.length) {
+      this.showChoosenList = false;
+    }
+  }
+
 }
+
