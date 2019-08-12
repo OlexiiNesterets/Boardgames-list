@@ -7,7 +7,7 @@
               class="tip">Двойной клик по игре для поиска в Google</span>
         <input type="text"
                #playersInput="ngModel"
-               [(ngModel)]="form.amount"
+               [(ngModel)]="amount"
                class="players-filter-input"
                placeholder="Кол-во игроков">
       </div>
@@ -80,7 +80,7 @@
          (click)="onCLick(game)"
          (dblclick)="onDoubleClick(game)"
          [class.selected-game]="selectedGame === game"
-         [class.choosen-for-random]="choosenGames.indexOf(game.name) !== -1"
+         [class.choosen-for-random]="choosenContains(game)"
          class="game-tr">
       <label class="game-tr-label">
         <div class="td name">
@@ -117,7 +117,7 @@
   <div class="message-area message-area-choosen">
     <div *ngFor="let game of choosenGames"
          class="game-tr game-tr-choosen">
-      <div class="td name">{{game}}</div>
+      <div class="td name">{{game.name}}</div>
       <button (click)="removeGame(game)"
               class="close-button close-button-item">X</button>
     </div>

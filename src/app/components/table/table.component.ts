@@ -25,7 +25,7 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   chooseForRandom: boolean;
   choosenGames = [];
 
-  form: { amount: number | null } = { amount: null };
+  amount: number;
 
   isAscending = {
     name: false,
@@ -85,7 +85,7 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   }
 
   onSubmit() {
-    const amount = +this.form.amount;
+    const amount = +this.amount;
     if (!/\d/.test(amount.toString())) {
       console.log('returned');
       console.log(amount);
@@ -97,6 +97,17 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
         const minLimitOk = game.players.min <= amount;
         return minLimitOk && maxLimitOk;
       });
+
+      if (this.choosenGames.length) {
+        this.choosenGames = this.choosenGames.filter(game => {
+          const maxLimitOk = !game.players.max || game.players.max >= amount;
+          const minLimitOk = game.players.min <= amount;
+          if (!(minLimitOk && maxLimitOk)) {
+            this.checkboxSelections[game.name] = false;
+          }
+          return minLimitOk && maxLimitOk;
+        });
+      }
     } else {
       this.gamesToShow = gamesList;
     }
@@ -209,27 +220,33 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   }
 
   onCLick(game: Boardgame) {
+    console.log('click');
     if (!this.chooseForRandom) {
       this.selectedGame = game;
     }
   }
 
   onDoubleClick(game: Boardgame) {
+    console.log('dbclick');
     if (!this.chooseForRandom) {
       this.googleGameSearch(game);
     }
   }
 
   onCheck(game: Boardgame) {
-    if (this.choosenGames.indexOf(game.name) === -1) {
-      this.choosenGames.push(game.name);
+      if (!this.choosenGames.some(choosenGame => game.name === choosenGame.name)) {
+      this.choosenGames.push(game);
       console.log({choosenGames: this.choosenGames});
     } else {
-      this.choosenGames = this.choosenGames.filter(gameName => {
-        return gameName !== game.name;
+      this.choosenGames = this.choosenGames.filter(choosenGame => {
+        return choosenGame.name !== game.name;
       });
       console.log({choosenGames: this.choosenGames});
     }
+  }
+
+  choosenContains(game: Boardgame) {
+    return this.choosenGames.some(choosenGame => choosenGame.name === game.name);
   }
 
   googleGameSearch(game: Boardgame) {
@@ -239,19 +256,20 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   getRandom(arr?: any) {
     if (arr && arr.length) {
-      this.recommendedGame = sample(arr);
+      this.recommendedGame = sample(arr.map(game => game.name));
     } else {
       this.recommendedGame = sample(this.gamesToShow.map(game => game.name));      
     }
     this.showModal = true;
   }
 
-  removeGame(game: string) {
-    this.choosenGames = this.choosenGames.filter(currGame => currGame !== game);
+  removeGame(game: Boardgame) {
+    this.choosenGames = this.choosenGames.filter(currGame => {
+      return currGame.name !== game.name});
     if (!this.choosenGames.length) {
       this.showChoosenList = false;
     }
-    this.checkboxSelections[game] = false;
+    this.checkboxSelections[game.name] = false;
   }
 
 }
