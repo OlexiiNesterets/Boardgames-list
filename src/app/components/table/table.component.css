@@ -20,7 +20,6 @@
 .header-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 15px;
 }
 
@@ -45,6 +44,11 @@
     text-transform: lowercase;
 }
 
+.random-game-button:disabled {
+    background: #d5ddde;
+    color: #f3f3f3;
+}
+
 .tip {
     font-size: 7px;
     font-style: italic;
@@ -59,6 +63,7 @@
     align-self: flex-end;
     width: 37%;
     padding: 4px;
+    margin-left: auto;
 }
 
 .headings {
@@ -68,6 +73,9 @@
 
 .name {
     flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .td,
@@ -85,6 +93,11 @@
     justify-content: center;
 }
 
+.th.name {
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
 .left {
     text-align: left;
 }
@@ -99,6 +112,7 @@
 
 .game-tr {
     display: flex;
+    font-size: 14px;
 }
 
 .game-tr:nth-child(odd) {
@@ -108,6 +122,11 @@
 .game-tr-choosen {
     display: flex;
     align-items: center;
+}
+
+.game-tr-label {
+    display: flex;
+    flex: 1 1 0;
 }
 
 .no-matches {
@@ -137,14 +156,31 @@
 }
 
 .choosen-for-random {
-    color: #e66431;
+    color: #2f6ece;
 }
 
 .choosen-games-count {
-    border: none;
-    background: #32cde6;
+    width: 20px;
+}
+
+.game-counter {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #fb2020;
     color: white;
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    position: absolute;
+    top: -7px;
+    right: -10px;
+}
+
+.menu-area {
+    display: flex;
+    position: relative;
 }
 
 .modal {
@@ -182,14 +218,14 @@
 }
 
 .static-message {
-    font-size: 10px;
-    margin-bottom: 30px;
+    font-size: 8px;
+    margin-bottom: 15px;
     text-transform: uppercase;
 }
 
 .recommended-game {
     font-weight: bold;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .close-button {

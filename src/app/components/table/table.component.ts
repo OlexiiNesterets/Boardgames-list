@@ -38,6 +38,11 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   selectedHeading;
   selectedGame: Boardgame;
 
+  checkboxSelections: any = {};
+
+  /* Создай объект и в темлейт ссылке обращайся как 
+  #someRef = myObj[game.name] */
+
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
@@ -45,6 +50,10 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     this.matIconRegistry.addSvgIcon(
       'arrow',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/down-arrow.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'menu',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/menu.svg')
     );
   }
 
@@ -70,6 +79,7 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
       setTimeout(() => {
         this.selectedGame = null
         this.choosenGames = result ? this.choosenGames : [];
+        this.checkboxSelections = {};
       }, 0);
     });
   }
@@ -201,22 +211,24 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   onCLick(game: Boardgame) {
     if (!this.chooseForRandom) {
       this.selectedGame = game;
-    } else {
-      if (this.choosenGames.indexOf(game.name) === -1) {
-        this.choosenGames.push(game.name);
-        console.log({choosenGames: this.choosenGames});
-      } else {
-        this.choosenGames = this.choosenGames.filter(gameName => {
-          return gameName !== game.name;
-        });
-        console.log({choosenGames: this.choosenGames});
-      }
     }
   }
 
   onDoubleClick(game: Boardgame) {
     if (!this.chooseForRandom) {
       this.googleGameSearch(game);
+    }
+  }
+
+  onCheck(game: Boardgame) {
+    if (this.choosenGames.indexOf(game.name) === -1) {
+      this.choosenGames.push(game.name);
+      console.log({choosenGames: this.choosenGames});
+    } else {
+      this.choosenGames = this.choosenGames.filter(gameName => {
+        return gameName !== game.name;
+      });
+      console.log({choosenGames: this.choosenGames});
     }
   }
 
@@ -239,7 +251,7 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     if (!this.choosenGames.length) {
       this.showChoosenList = false;
     }
+    this.checkboxSelections[game] = false;
   }
 
 }
-

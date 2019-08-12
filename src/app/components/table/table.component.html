@@ -3,7 +3,8 @@
 
     <div class="table-header">
       <div class="header-top">
-        <span class="tip">Двойной клик по игре для поиска в Google</span>
+        <span *ngIf="!chooseForRandom"
+              class="tip">Двойной клик по игре для поиска в Google</span>
         <input type="text"
                #playersInput="ngModel"
                [(ngModel)]="form.amount"
@@ -11,8 +12,20 @@
                placeholder="Кол-во игроков">
       </div>
       <div class="random-area">
-        <button (click)="getRandom(choosenGames)"
-                class="random-game-button">Случайная игра</button>
+        <div *ngIf="!chooseForRandom; then totalRandom else fromChoosen"></div>
+        <ng-template #totalRandom>
+          <button (click)="getRandom(choosenGames)"
+                  class="random-game-button">
+            <span>Случайная игра</span>
+          </button>
+        </ng-template>
+        <ng-template #fromChoosen>
+          <button (click)="getRandom(choosenGames)"
+                  [disabled]="!choosenGames.length"
+                  class="random-game-button">
+            <span>Случайная из выборки</span>
+          </button>
+        </ng-template>
         <label class="poteitial-games">
           <span>Возможные игры</span>
           <input type="checkbox"
@@ -20,9 +33,15 @@
                  #chooseGamesForRandom="ngModel"
                  [(ngModel)]="chooseForRandom">
         </label>
-        <button *ngIf="chooseForRandom && choosenGames.length"
-                (click)="showChoosenList = true"
-                class="choosen-games-count">{{choosenGames.length}}</button>
+        <div *ngIf="chooseForRandom && choosenGames.length"
+             class="menu-area">
+          <mat-icon svgIcon='menu'
+                    (click)="showChoosenList = true"
+                    class="choosen-games-count"></mat-icon>
+          <div class="game-counter">
+            <span>{{choosenGames.length}}</span>
+          </div>
+        </div>
       </div>
       <div class="headings">
         <div (click)="toSortName(name)"
@@ -63,9 +82,17 @@
          [class.selected-game]="selectedGame === game"
          [class.choosen-for-random]="choosenGames.indexOf(game.name) !== -1"
          class="game-tr">
-      <div class="td name">{{game.name}}</div>
-      <div class="td centred">{{game.players.min}}</div>
-      <div class="td centred">{{game.players.max || '-'}}</div>
+      <label class="game-tr-label">
+        <div class="td name">
+          <span>{{game.name}}</span>
+          <input *ngIf="chooseForRandom"
+                 type="checkbox"
+                 [(ngModel)]="checkboxSelections[game.name]"
+                 (click)="onCheck(game)">
+        </div>
+        <div class="td centred">{{game.players.min}}</div>
+        <div class="td centred">{{game.players.max || '-'}}</div>
+      </label>
     </div>
     <div *ngIf="!gamesToShow.length"
          class="no-matches">
