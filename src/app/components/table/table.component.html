@@ -84,11 +84,12 @@
          class="game-tr">
       <label class="game-tr-label">
         <div class="td name">
-          <span>{{game.name}}</span>
+          <span class="game-name">{{game.name}}</span>
           <input *ngIf="chooseForRandom"
                  type="checkbox"
                  [(ngModel)]="checkboxSelections[game.name]"
-                 (click)="onCheck(game)">
+                 (click)="onCheck(game)"
+                 class="checkbox">
         </div>
         <div class="td centred">{{game.players.min}}</div>
         <div class="td centred">{{game.players.max || '-'}}</div>
@@ -104,7 +105,7 @@
 <div *ngIf="showModal"
      (click)="showModal = false"
      class="modal">
-  <div class="message-area">
+  <div class="message-area message-area-recommend">
     <span class="static-message">Зарубитесь в</span>
     <span class="recommended-game">{{recommendedGame}}</span>
   </div>
@@ -112,14 +113,21 @@
 
 <div *ngIf="showChoosenList"
      class="modal">
-  <button (click)="showChoosenList = false"
-          class="close-button">x</button>
-  <div class="message-area message-area-choosen">
-    <div *ngFor="let game of choosenGames"
-         class="game-tr game-tr-choosen">
-      <div class="td name">{{game.name}}</div>
-      <button (click)="removeGame(game)"
-              class="close-button close-button-item">X</button>
+  <div class="message-wrapper">
+    <div class="message-area message-area-choosen">
+      <h2 class="selected-list-title">Выбранные игры</h2>
+      <div class="selected-list">
+        <div *ngFor="let game of choosenGames"
+             class="game-tr game-tr-choosen">
+          <div class="td name">{{game.name}}</div>
+          <mat-icon svgIcon='remove'
+                    (click)="removeGame(game)"
+                    class="close-button close-button-item"></mat-icon>
+        </div>
+      </div>
     </div>
+    <mat-icon svgIcon='close'
+              (click)="showChoosenList = false"
+              class="close-button close-modal"></mat-icon>
   </div>
 </div>

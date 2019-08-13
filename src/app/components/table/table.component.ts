@@ -40,9 +40,6 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   checkboxSelections: any = {};
 
-  /* Создай объект и в темлейт ссылке обращайся как 
-  #someRef = myObj[game.name] */
-
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
@@ -54,6 +51,14 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     this.matIconRegistry.addSvgIcon(
       'menu',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/menu.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'remove',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/remove.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'close',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/svg/close.svg')
     );
   }
 

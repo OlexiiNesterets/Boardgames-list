@@ -64,6 +64,9 @@
     width: 37%;
     padding: 4px;
     margin-left: auto;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .headings {
@@ -76,6 +79,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.game-name {
+    max-width: 90%;
+}
+
+.checkbox {
+    margin: 0;
 }
 
 .td,
@@ -196,6 +207,10 @@
     background: #1e2b2bb0;
 }
 
+.modal .name {
+    text-align: start;
+}
+
 .message-area {
     display: flex;
     flex-direction: column;
@@ -205,16 +220,39 @@
     background: white;
     color: #656565;
     text-align: center;
-    max-width: 80%;
-    min-width: 50%;
+    /* max-width: 80%;
+    min-width: 50%; */
     border-radius: 10px;
 }
 
+.message-area-recommend {
+    max-width: 80%;
+    min-width: 50%;
+}
+
 .message-area-choosen {
+    position: relative;
     display: block;
-    max-height: 80vh;
     overflow: auto;
     padding: 0;
+}
+
+.message-wrapper {
+    position: relative;
+    max-width: 80%;
+    min-width: 50%;
+}
+
+.selected-list {
+    overflow: auto;
+    max-height: 70vh;
+}
+
+.selected-list-title {   
+    box-shadow: 0 2px 6px -4px #969696;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 0;
 }
 
 .static-message {
@@ -240,8 +278,14 @@
 }
 
 .close-button-item {
-    color: gray;
+    color: #949494;
     position: static;
     margin-right: 15px;
-    font-size: 15px;
+    width: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: -25px;
+    right: -25px;
 }
