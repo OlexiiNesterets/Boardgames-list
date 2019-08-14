@@ -36,7 +36,7 @@
         <div *ngIf="chooseForRandom && choosenGames.length"
              class="menu-area">
           <mat-icon svgIcon='menu'
-                    (click)="showChoosenList = true"
+                    (click)="displayChoosen()"
                     class="choosen-games-count"></mat-icon>
           <div class="game-counter">
             <span>{{choosenGames.length}}</span>
@@ -127,7 +127,7 @@
       </div>
     </div>
     <mat-icon svgIcon='close'
-              (click)="showChoosenList = false"
+              (click)="hideChoosen()"
               class="close-button close-modal"></mat-icon>
   </div>
 </div>

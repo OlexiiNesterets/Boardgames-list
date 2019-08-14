@@ -1,4 +1,8 @@
-import { Component, OnInit, AfterViewInit, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component, OnInit, AfterViewInit, AfterContentInit, ViewChild,
+  ElementRef, Renderer2, Inject
+} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { NgModel } from '@angular/forms';
 import { gamesList } from '../../games-list';
 import { Boardgame } from '../../models/boardgame';
@@ -41,6 +45,8 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   checkboxSelections: any = {};
 
   constructor(
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
@@ -92,8 +98,6 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   onSubmit() {
     const amount = +this.amount;
     if (!/\d/.test(amount.toString())) {
-      console.log('returned');
-      console.log(amount);
       return;
     }
     if (amount) {
@@ -116,7 +120,6 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     } else {
       this.gamesToShow = gamesList;
     }
-    console.log('after filtering');
   }
 
   toSortName(elem?) {
@@ -225,28 +228,24 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
   }
 
   onCLick(game: Boardgame) {
-    console.log('click');
     if (!this.chooseForRandom) {
       this.selectedGame = game;
     }
   }
 
   onDoubleClick(game: Boardgame) {
-    console.log('dbclick');
     if (!this.chooseForRandom) {
       this.googleGameSearch(game);
     }
   }
 
   onCheck(game: Boardgame) {
-      if (!this.choosenGames.some(choosenGame => game.name === choosenGame.name)) {
+    if (!this.choosenGames.some(choosenGame => game.name === choosenGame.name)) {
       this.choosenGames.push(game);
-      console.log({choosenGames: this.choosenGames});
     } else {
       this.choosenGames = this.choosenGames.filter(choosenGame => {
         return choosenGame.name !== game.name;
       });
-      console.log({choosenGames: this.choosenGames});
     }
   }
 
@@ -263,18 +262,29 @@ export class TableComponent implements OnInit, AfterViewInit, AfterContentInit {
     if (arr && arr.length) {
       this.recommendedGame = sample(arr.map(game => game.name));
     } else {
-      this.recommendedGame = sample(this.gamesToShow.map(game => game.name));      
+      this.recommendedGame = sample(this.gamesToShow.map(game => game.name));
     }
     this.showModal = true;
   }
 
   removeGame(game: Boardgame) {
     this.choosenGames = this.choosenGames.filter(currGame => {
-      return currGame.name !== game.name});
+      return currGame.name !== game.name
+    });
     if (!this.choosenGames.length) {
       this.showChoosenList = false;
     }
     this.checkboxSelections[game.name] = false;
+  }
+
+  displayChoosen() {
+    this.showChoosenList = true;
+    this.renderer.addClass(this.document.body, 'noscroll');
+  }
+
+  hideChoosen() {
+    this.showChoosenList = false;
+    this.renderer.removeClass(this.document.body, 'noscroll');
   }
 
 }
