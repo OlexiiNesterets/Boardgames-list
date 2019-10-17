@@ -48,7 +48,7 @@ export const gamesList: Boardgame[] = [
     { name: 'Братство Пара', searchName:'Братство Пара', players: { min: 3, max: 4 } },
     { name: 'One Night Ultimate Werewolf (Оборотень)', searchName:'One Night Ultimate Werewolf', players: { min: 5, max: 10 } },
     { name: 'Carson City', searchName:'Carson City', players: { min: 4, max: 5 } },
-    { name: 'Root', searchName:'Root', players: { min: 4, max: 4 } },
+    { name: 'Root', searchName:'Root', players: { min: 2, max: 4 } },
     { name: 'Лес: Легенда о Мантикоре', searchName:'Лес: Легенда о Мантикоре', players: { min: 3, max: 4 } },
     { name: 'Манчкин (Звёздный)', searchName:'Манчкин Звёздный', players: { min: 4, max: 6 } },
     { name: 'Roll Through the Ages: The Bronze Age (eng)', searchName:'Roll Through the Ages: The Bronze Age', players: { min: 2, max: 4 } },
@@ -65,5 +65,5 @@ export const gamesList: Boardgame[] = [
     { name: 'Ghost Stories', searchName:'Ghost Stories', players: { min: 3, max: 4 } },
     { name: 'Age of War (Касугаяма)', searchName:'Age of War', players: { min: 3, max: 5 } },
     { name: 'Hive', searchName:'Hive', players: { min: 2, max: 2 } },
-
+    { name: 'Seasons', searchName:'Seasons', players: { min: 2, max: 3 } },
 ]
