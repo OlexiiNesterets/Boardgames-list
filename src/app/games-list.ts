@@ -66,4 +66,6 @@ export const gamesList: Boardgame[] = [
     { name: 'Age of War (Касугаяма)', searchName:'Age of War', players: { min: 3, max: 5 } },
     { name: 'Hive', searchName:'Hive', players: { min: 2, max: 2 } },
     { name: 'Seasons', searchName:'Seasons', players: { min: 2, max: 3 } },
+    { name: 'Azul', searchName:'Azul', players: { min: 2, max: 4 } },
+    { name: 'Ticket to Ride: Nordic Countries', searchName:'Ticket to Ride: Nordic Countries', players: { min: 2, max: 3 } },
 ]
