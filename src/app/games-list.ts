@@ -68,4 +68,6 @@ export const gamesList: Boardgame[] = [
     { name: 'Seasons', searchName:'Seasons', players: { min: 2, max: 3 } },
     { name: 'Azul', searchName:'Azul', players: { min: 2, max: 4 } },
     { name: 'Ticket to Ride: Nordic Countries', searchName:'Ticket to Ride: Nordic Countries', players: { min: 2, max: 3 } },
+    { name: 'Takenoko', searchName:'Takenoko', players: { min: 2, max: 4 } },
+    { name: 'Фонарики: Праздник урожая', searchName:'Фонарики: Праздник урожая', players: { min: 2, max: 4 } },
 ]
